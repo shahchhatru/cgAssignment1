@@ -1,2 +1,3 @@
 ﻿  main.cpp
+C:\Users\Chhatra\source\repos\OpenglCGAssignment\main.cpp(109,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   OpenglCGAssignment.vcxproj -> C:\Users\Chhatra\source\repos\OpenglCGAssignment\x64\Debug\OpenglCGAssignment.exe

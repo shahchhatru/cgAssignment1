@@ -51,6 +51,8 @@ int InitializeWindow() {
    return 0;
 }
 
+
+
 void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -71,7 +73,7 @@ int main() {
     glViewport(0, 0, 800, 600);
     //---------vertex shader---------//
     //generate shader object using default.vert and default.frag file
-    Shader shaderProgram("default.vert", "default.frag");
+    Shader shaderProgram("default.vert", "Default.frag");
     //Generates vertex array object
     VAO VAO1;
     VAO1.Bind();
@@ -85,6 +87,16 @@ int main() {
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();
+   
+    //int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+    int vertexColorLocation = glGetUniformLocation(shaderProgram.ID, "ourColor");
+    std::cout << shaderProgram.ID << std::endl;
+    std::cout << vertexColorLocation << std::endl;
+   /* int nrAttributes;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+    
+    */
+    //std::cout << "Maximum nr of vertex attributes supported: " << vertexColorLocation << std::endl;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -94,7 +106,12 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         //glUseProgram(shaderProgram);
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        float redValue = (cos(timeValue) / 2.0f) + 0.5f;
         shaderProgram.Activate();//to activate shader program
+        //glUseProgram(shaderProgram);
+        glUniform4f(vertexColorLocation, redValue, greenValue, 0.0f, 1.0f);
         VAO1.Bind();
         //glDrawArrays(GL_TRIANGLES, 0, 3);
         glDrawElements(GL_TRIANGLES, sizeof(vertices)/sizeof(float), GL_UNSIGNED_INT, 0);
