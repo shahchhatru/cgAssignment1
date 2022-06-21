@@ -8,12 +8,12 @@
 //let's initialize a pointer to window
 GLFWwindow* window;
 GLfloat vertices[] = {
-    -0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
-        0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
-        0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f, // Upper corner
-        -0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner left
-        0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner right
-        0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f // Inner down
+    -0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,    0.3f,0.3f,0.3f, // Lower left corner
+        0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, 0.8f,0.7f,0.9f,// Lower right corner
+        0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f,  0.0f,0.3f,0.3f, // Upper corner
+        -0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, 0.9f,0.0f,0.0f, // Inner left
+        0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f,  0.7f,0.0f,0.0f, // Inner right
+        0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f,     0.3f,0.6f,0.3f, // Inner down
 
 };
 
@@ -82,14 +82,15 @@ int main() {
     VBO VBO1(vertices, sizeof(vertices));
     EBO EBO1(indices, sizeof(indices));
     //Links VBO to VAO
-    VAO1.LinkVBO(VBO1, 0);
+    VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+    VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     //unbind all object to prevent accidental modification
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();
    
     //int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-    int vertexColorLocation = glGetUniformLocation(shaderProgram.ID, "ourColor");
+    int vertexColorLocation = glGetUniformLocation(shaderProgram.ID, "scale");
     std::cout << shaderProgram.ID << std::endl;
     std::cout << vertexColorLocation << std::endl;
    /* int nrAttributes;
@@ -111,7 +112,7 @@ int main() {
         float redValue = (cos(timeValue) / 2.0f) + 0.5f;
         shaderProgram.Activate();//to activate shader program
         //glUseProgram(shaderProgram);
-        glUniform4f(vertexColorLocation, redValue, greenValue, 0.0f, 1.0f);
+        glUniform1f(vertexColorLocation, redValue+greenValue);
         VAO1.Bind();
         //glDrawArrays(GL_TRIANGLES, 0, 3);
         glDrawElements(GL_TRIANGLES, sizeof(vertices)/sizeof(float), GL_UNSIGNED_INT, 0);
