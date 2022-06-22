@@ -30,12 +30,14 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile) {
     glShaderSource(vertexShader, 1, &vertexSource, NULL);
     //to make gpu understand the source code
     glCompileShader(vertexShader);
+	compileErrors(vertexShader, "VERTEX");
     //---------vertex shader---------//
      //---------fragment shader---------//
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
     //to make gpu understand the fragment source code
     glCompileShader(fragmentShader);
+	compileErrors(fragmentShader, "FRAGMENT");
     //---------fragment shader---------//
 
     //in order to use both the shader we need to ramp it up into something called as shader program
@@ -57,4 +59,30 @@ void Shader::Activate() {
 
 void Shader::Delete() {
     glDeleteProgram(ID);
+}
+
+void Shader::compileErrors(unsigned int shader, const char* type)
+{
+	// Stores status of compilation
+	GLint hasCompiled;
+	// Character array to store error message in
+	char infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &hasCompiled);
+		if (hasCompiled == GL_FALSE)
+		{
+			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+			std::cout << "SHADER_COMPILATION_ERROR for:" << type << "\n" << infoLog << std::endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(shader, GL_LINK_STATUS, &hasCompiled);
+		if (hasCompiled == GL_FALSE)
+		{
+			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+			std::cout << "SHADER_LINKING_ERROR for:" << type << "\n" << infoLog << std::endl;
+		}
+	}
 }
