@@ -14,12 +14,17 @@ void Camera::updateMatrix(float FOVdeg, float nearPlane, float farPlane)
 	// Initializes matrices since otherwise they will be the null matrix
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
-
+	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 modelZ = glm::mat4(1.0f);
+	glm::mat4 modelX = glm::mat4(1.0f);
+	model = glm::rotate(model, glm::radians(rotationY), glm::vec3(0.0f, 1.0f, 0.0f));
+	modelZ = glm::rotate(modelZ, glm::radians(rotationZ), glm::vec3(0.0f, 0.0f, 1.0f));
+	modelX = glm::rotate(modelX, glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));
 	// Makes camera look in the right direction from the right position
 	view = glm::lookAt(Position, Position + Orientation, Up);
 	// Adds perspective to the scene
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / height, nearPlane, farPlane);
-	cameraMatrix = projection * view;
+	cameraMatrix = projection * view * model * modelZ * modelX;
 }
 
 void Camera::Matrix(Shader& shader, const char* uniform) {
@@ -55,6 +60,30 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		Position += speed * -Up;
 	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		rotationY -= 0.4f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	{
+		rotationY += 0.4f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		rotationZ -= 0.4f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		rotationZ += 0.4f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
+	{
+		rotationX -= 0.1f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
+	{
+		rotationX += 0.1f;
+	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 	{
 		speed = 0.4f;
@@ -63,6 +92,7 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		speed = 0.1f;
 	}
+
 
 
 	// Handles mouse inputs
