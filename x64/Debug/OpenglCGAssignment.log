@@ -1,2 +1,12 @@
-﻿  main.cpp
+﻿  Camera.cpp
+  EBO.cpp
+  main.cpp
+  ShaderClass.cpp
+  stb.cpp
+  Texture.cpp
+  VAO.cpp
+C:\Users\Chhatra\source\repos\OpenglCGAssignment\VAO.cpp(10,63): warning C4244: 'argument': conversion from 'GLsizeiptr' to 'GLsizei', possible loss of data
+  VBO.cpp
+  Generating Code...
+  glad.c
   OpenglCGAssignment.vcxproj -> C:\Users\Chhatra\source\repos\OpenglCGAssignment\x64\Debug\OpenglCGAssignment.exe

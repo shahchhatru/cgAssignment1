@@ -125,10 +125,10 @@ int main()
 {
 
 	std::cout<<"Assignment done by"<<std::endl;
-	std::cout<<"Ayush Parajuli 076bct013"<<std::endl
-	std::cout<<"Chhatra Bikram Shah 076bct021"<<std::endl
-	std::cout<<"Dhiraj Acharya 076bct023"<<std::endl
-	std::cout<<"Aashish kumar Sah  076bct097"<<std::endl
+	std::cout << "Ayush Parajuli 076bct013" << std::endl;
+	std::cout << "Chhatra Bikram Shah 076bct021" << std::endl;
+	std::cout << "Dhiraj Acharya 076bct023" << std::endl;
+	std::cout << "Aashish kumar Sah  076bct097" << std::endl;
 	// Initialize GLFW
 	glfwInit();
 	
