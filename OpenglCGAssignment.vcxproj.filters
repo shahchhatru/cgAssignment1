@@ -42,6 +42,12 @@
     <ClCompile Include="stb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -59,6 +65,12 @@
     <ClInclude Include="VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.vert">
@@ -67,9 +79,24 @@
     <None Include="Default.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="light.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="light.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bricpng11.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="brickText.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
     <Image Include="instaImg.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="brick.png">
       <Filter>Resource Files\textures</Filter>
     </Image>
   </ItemGroup>
